@@ -1,12 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+<title>HTML Calculator</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
+
+    <div class="result">
+        <input type="textfield" name="result" id="result">
+    </div>
+    <div class="buttons">
+        <button class="buttons">1</button>
+
+    </div>
+
+
+
+<input type="button" value="1" onClick="document.calculator.ans.value+='1'">
+<input type="reset" value="Reset">
+<input type="button" value="=" onClick="document.calculator.ans.value=eval(document.calculator.ans.value)">
+
 </body>
 </html>
