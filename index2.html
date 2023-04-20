@@ -1,33 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    
+    <script src="https://code.jquery.com/jquery-3.6.4.js"
+    integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
+
 </head>
+
 <body>
+    
+    <h1 class="Title">책 이름을 적어주세요</h1>
+    <div>
+        <input type="text" name="" id="book_input" class="book_input">
+        <button id="book_scearch" onclick="scearch()" class="book_scearch">검색</button>
+    </div>
 
+    <div>
+        <p class="book_title1"></p>
+        <p class="book_thumbnail1"></p>
+        <p class="book_contents1"></p>
+    </div>
+    <div>
+        <p class="book_title2"></p>
+        <p class="book_thumbnail2"></p>
+        <p class="book_contents2"></p>
+    </div>
+    <div>
+        <p class="book_title3"></p>
+        <p class="book_thumbnail3"></p>
+        <p class="book_contents3"></p>
+    </div>
+    <div>
+        <p class="book_title4"></p>
+        <p class="book_thumbnail4"></p>
+        <p class="book_contents4"></p>
+    </div>
+    <div>
+        <p class="book_title5"></p>
+        <p class="book_thumbnail5"></p>
+        <p class="book_contents5"></p>
+    </div>
+    <div>
+        <p class="book_title6"></p>
+        <p class="book_thumbnail6"></p>
+        <p class="book_contents6"></p>
+    </div>
+    <div>
+        <p class="book_title7"></p>
+        <p class="book_thumbnail7"></p>
+        <p class="book_contents7"></p>
+    </div>
+    <div>
+        <p class="book_title8"></p>
+        <p class="book_thumbnail8"></p>
+        <p class="book_contents8"></p>
+    </div>
+    <div>
+        <p class="book_title9"></p>
+        <p class="book_thumbnail9"></p>
+        <p class="book_contents9"></p>
+    </div>
+    <div>
+        <p class="book_title10"></p>
+        <p class="book_thumbnail10"></p>
+        <p class="book_contents10"></p>
+    </div>
+    
 
-
-
-    <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E="
-    crossorigin="anonymous"></script>
     <script>
-        $.ajax({
+        function scearch() {
+            let scearch = document.getElementById('book_input').value;
+            console.log(scearch);
+
+            $.ajax({
                 method: "GET",
                 url: "https://dapi.kakao.com/v3/search/book?target=title",
                 data: {
-                    query: "호모사피엔스",
+                    query: scearch,
                 },
                 headers: {
-                    Authorization: "KakaoAK 0f7acd5ca96b1d76578d02adc4161263"
+                    Authorization: "KakaoAK 3b1955c57d81c4c26fb9e9e6421aee40"
                 },
             })
-            .done(function (msg) {
-                console.log(msg);
-            });
+                .done(function (msg) {
+                    //console.log(msg.documents[0].title);
+                    //console.log(msg.documents[0].thumbnail);
+                    let json = msg
+                    console.log(json);
+                    for(let i = 0; i < json.documents.length; i++) {
+                        console.log(json.documents[i].title);
+                        $(".book_title" + i).append( "<strong>"+msg.documents[i].title+"</strong>" );
+                        $(".book_contents" + i).append( "<strong>"+msg.documents[i].contents+"</strong>" );
+                        $(".book_thumbnail" + i).append( "<img src='"+msg.documents[i].thumbnail+"'/>" );
+                    }
+                    
+                });
+            }
     </script>
 </body>
+
 </html>
