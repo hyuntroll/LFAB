@@ -94,9 +94,9 @@
                     console.log(json);
                     for (let i = 0; i < json.documents.length; i++) {
                         console.log(json.documents[i].title);
-                        $(".book_title" + i).append("<strong>" + msg.documents[i].title + "</strong>");
-                        $(".book_contents" + i).append("<strong>" + msg.documents[i].contents + "</strong>");
-                        $(".book_thumbnail" + i).append("<img src='" + msg.documents[i].thumbnail + "'/>");
+                        $(".book_title" + i).html("<strong>" + msg.documents[i].title + "</strong>");
+                        $(".book_contents" + i).html("<strong>" + msg.documents[i].contents + "</strong>");
+                        $(".book_thumbnail" + i).html("<img src='" + msg.documents[i].thumbnail + "'/>");
                     }
 
                 });
