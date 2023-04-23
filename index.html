@@ -1,23 +1,60 @@
-<html>
+<!DOCTYPE html>
+<html lang="kr">
+
 <head>
-<title>HTML Calculator</title>
-<link rel="stylesheet" href="style.css">
+    
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.js"
+        integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
+
 </head>
+
 <body>
 
-    <div class="result">
-        <input type="textfield" name="result" id="result">
+    <h1 class="Title">책 이름을 적어주세요</h1>
+    <div>
+        <input onchange="scearch()"type="text" name="" id="book_input" class="book_input">
+        <button id="book_scearch" onclick="scearch()" class="book_scearch">검색</button>
     </div>
-    <div class="buttons">
-        <button class="buttons">1</button>
-
+    <div class="book">
+        
     </div>
 
+    <script>
+        function scearch() {
+            let scearch = document.getElementById('book_input').value;
+            console.log(scearch);
 
+            $.ajax({
+                method: "GET",
+                url: "https://dapi.kakao.com/v3/search/book?target=title",
+                data: {
+                    query: scearch,
+                    size: 50,
+                },
+                headers: {
+                    Authorization: "KakaoAK 3b1955c57d81c4c26fb9e9e6421aee40"
+                },
+            })
+                .done(function (msg) {
+                    //console.log(msg.documents[0].title);
+                    //console.log(msg.documents[0].thumbnail);
+                    let json = msg
+                    console.log(json);
+                    for (let i = 0; i < json.documents.length; i++) {
+                        //console.log(json.documents[i].title);
+                        $(".book").append("<strong>" + msg.documents[i].title + "</strong> <br>");
+                        $(".book").append("<a href='" + msg.documents[i].url + "' img src='" + msg.documents[i].thumbnail + "'</a> <br>");
+                        $(".book").append("<strong>" + msg.documents[i].contents + "</strong> <br>");
+                        
+                    }
 
-<input type="button" value="1" onClick="document.calculator.ans.value+='1'">
-<input type="reset" value="Reset">
-<input type="button" value="=" onClick="document.calculator.ans.value=eval(document.calculator.ans.value)">
-
+                });
+        }
+    </script>
 </body>
+
 </html>
