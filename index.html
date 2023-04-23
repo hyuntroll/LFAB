@@ -1,27 +1,35 @@
 <!DOCTYPE html>
-<html lang="kr">
-
+<html lang="en">
 <head>
-    
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Let's Find Any Book!</title>
+    <link rel="shortcut icon" href="/image/book.png">
+    <link rel="stylesheet" href="style.css">
     <script src="https://code.jquery.com/jquery-3.6.4.js"
         integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
-
+    
 </head>
-
 <body>
+    <h1>
+        <img src="/image/studying.png" width="100" height="100" alt="">
+        <span>Let's Find Any Book</span>
 
-    <h1 class="Title">책 이름을 적어주세요</h1>
-    <div>
-        <input onchange="scearch()"type="text" name="" id="book_input" class="book_input">
-        <button id="book_scearch" onclick="scearch()" class="book_scearch">검색</button>
-    </div>
-    <div class="book">
+    </h1>
+    <input onchange="scearch()" type="q" id="book_input">
         
+    <div class="button-box">
+        <button type="submit">Google 검색</button>
+        <a href="https://www.google.com/doodles"><button>I'm Feeling Lucking</button></a>
     </div>
+
+    <div class="book_output">
+        <br>
+    </div>
+
+
+
 
     <script>
         function scearch() {
@@ -46,9 +54,7 @@
                     console.log(json);
                     for (let i = 0; i < json.documents.length; i++) {
                         //console.log(json.documents[i].title);
-                        $(".book").append("<strong>" + msg.documents[i].title + "</strong> <br>");
-                        $(".book").append("<a href='" + msg.documents[i].url + "' img src='" + msg.documents[i].thumbnail + "'</a> <br>");
-                        $(".book").append("<strong>" + msg.documents[i].contents + "</strong> <br>");
+                        $(".book_output").append("<div class='book'> <strong>" + msg.documents[i].title + "</strong> <br><br> <img src='" + msg.documents[i].thumbnail + "'/> </div>");
                         
                     }
 
@@ -56,5 +62,4 @@
         }
     </script>
 </body>
-
 </html>
